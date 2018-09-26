@@ -1,7 +1,9 @@
 package com.speex.audiovideo;
 
 import android.content.Context;
+import android.media.AudioFormat;
 import android.media.AudioManager;
+import android.media.AudioTrack;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -21,6 +23,8 @@ import com.speex.audiovideo.exception.AudioConfigurationException;
 import com.speex.audiovideo.exception.AudioStartRecordingException;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -194,5 +198,41 @@ public class MainActivity extends AppCompatActivity {
         max = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM);
         current = mAudioManager.getStreamVolume(AudioManager.STREAM_ALARM);
         Log.d(TAG, "提示声音音量 max : " + max + " ,current: " + current);
+    }
+
+    /**
+     * 使用当贝提供的播放TTS
+     */
+    AudioTrack trackplayer = null;
+    boolean stop = false;
+    int bufsize = 0;
+
+    public void playTTS(View view) {
+        bufsize = AudioTrack.getMinBufferSize(16000, AudioFormat.CHANNEL_OUT_MONO, AudioFormat.ENCODING_PCM_16BIT);
+        trackplayer = new AudioTrack(AudioManager.STREAM_ALARM, 16000, AudioFormat.CHANNEL_OUT_MONO, AudioFormat.ENCODING_PCM_16BIT, bufsize, AudioTrack.MODE_STREAM);
+        trackplayer.play();
+        Log.d(TAG, bufsize + "============>");
+        stop = true;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    InputStream in = new FileInputStream(new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath() + "/usb.wav"));
+                    byte buf[] = new byte[bufsize];
+                    in.read(buf, 0, 44);
+                    while (stop) {
+                        int ret = in.read(buf);
+                        if (ret == -1) break;
+                        trackplayer.write(buf, 0, ret);
+                        Log.d(TAG, "гнгнгнгн=============>" + ret);
+                        Thread.sleep(30);
+                    }
+                } catch (Exception e) {
+                }
+                Log.d(TAG, "AudioTrack exit");
+                trackplayer.stop();
+                trackplayer.release();
+            }
+        }).start();
     }
 }
