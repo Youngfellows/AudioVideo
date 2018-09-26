@@ -24,15 +24,15 @@ public class AudioTrackManager {
     private static int STREAM_TYPE = AudioManager.STREAM_ALARM;
 
     /*音频的采样率，44.1kHz可以所有手机*/
-    private static int SAMPLE_RATE_IN_HZ = 44100;
-//    private static int SAMPLE_RATE_IN_HZ = 16000;
+//    private static int SAMPLE_RATE_IN_HZ = 44100;
+    private static int SAMPLE_RATE_IN_HZ = 16000;
 
     /*音频的声道数，此处为单声道*/
-    private static int CHANNEL_CONFIGURATION = AudioFormat.CHANNEL_IN_STEREO;//立体声
+//    private static int CHANNEL_CONFIGURATION = AudioFormat.CHANNEL_IN_STEREO;//立体声
 //    private static int CHANNEL_CONFIGURATION = AudioFormat.CHANNEL_IN_MONO;//单声道
 //    private static int CHANNEL_CONFIGURATION = AudioFormat.CHANNEL_CONFIGURATION_MONO;//单声道
 //    private static int CHANNEL_CONFIGURATION = AudioFormat.CHANNEL_CONFIGURATION_STEREO;//双声道;
-//    private static int CHANNEL_CONFIGURATION = AudioFormat.CHANNEL_OUT_MONO;//单声道输出(左)
+    private static int CHANNEL_CONFIGURATION = AudioFormat.CHANNEL_OUT_MONO;//单声道输出(左)
 //    private static int CHANNEL_CONFIGURATION = AudioFormat.CHANNEL_OUT_STEREO;//立体声输出(左和右)
 
 //    AudioFormat.CHANNEL_OUT_STEREO; // 设置输出声道类型为双声道立体声
@@ -80,14 +80,24 @@ public class AudioTrackManager {
         if (mAudioTrack == null || mAudioTrack.getState() != AudioTrack.STATE_INITIALIZED)
             throw new AudioConfigurationException();
 
+        //wang
 //        mAudioTrack = new AudioTrack(mStreamType, FREQUENCY, AudioFormat.CHANNEL_OUT_MONO,
 //                AudioFormat.ENCODING_PCM_16BIT, bufferSize, AudioTrack.MODE_STREAM);
 //        mAudioTrack.play();
-//
-//
+
 //        //且播之前会获取焦点：
 //        mAudioManager.requestAudioFocus(listener, streamType, gainType);
 //        gainType = AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_EXCLUSIVE;
+
+        //xing
+//        int bufferSize = AudioTrack.getMinBufferSize(16000, AudioFormat.CHANNEL_OUT_MONO, AudioFormat.ENCODING_PCM_16BIT);
+//        mAudioTrack = new AudioTrack(AudioManager.STREAM_MUSIC, 16000, AudioFormat.CHANNEL_OUT_MONO,
+//                AudioFormat.ENCODING_PCM_16BIT, bufferSize, AudioTrack.MODE_STREAM);
+//        mAudioTrack.play();
+
+
+        //如果是音箱的话，可以把第二个参数改成
+        //AudioFormat.CHANNEL_OUT_STEREO;
 
     }
 
@@ -164,6 +174,7 @@ public class AudioTrackManager {
                 stop();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
+                mIsPlaying = false;
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -22,28 +22,28 @@ public class AudioRecordManager {
     /*录音线程*/
     private Thread mRecordThread;
     /*音频采集的输入源，麦克风*/
-    private static int AUDIO_SOURCE = MediaRecorder.AudioSource.MIC;
-//    private static int AUDIO_SOURCE = MediaRecorder.AudioSource.DEFAULT;
+//    private static int AUDIO_SOURCE = MediaRecorder.AudioSource.MIC;
+    public static int AUDIO_SOURCE = MediaRecorder.AudioSource.DEFAULT;
 
     /*音频采集的采样频率*/
-    public static int SAMPLE_RATE_IN_HZ = 44100;
-//    public static int SAMPLE_RATE_IN_HZ = 16000;
+//    public static int SAMPLE_RATE_IN_HZ = 44100;
+    public static int SAMPLE_RATE_IN_HZ = 16000;
 
     /*音频采集的声道数,此处为单声道，后期处理可以转换成双声道的立体声,如果这里是MONO声道的话，会有变声的情况*/
-    private static int CHANNEL_CONFIGURATION = AudioFormat.CHANNEL_IN_STEREO;//立体声
+//    public static int CHANNEL_CONFIGURATION = AudioFormat.CHANNEL_IN_STEREO;//立体声
     //AudioFormat.CHANNEL_IN_MONO 单声道，一个声道进行采样
     //AudioFormat.CHANNEL_IN_STEREO 双声道，两个声道进行采样
 
-//    private static int CHANNEL_CONFIGURATION = AudioFormat.CHANNEL_IN_MONO;//单声道
-//    private static int CHANNEL_CONFIGURATION = AudioFormat.CHANNEL_IN_STEREO;//立体声
-//    private static int CHANNEL_CONFIGURATION = AudioFormat.CHANNEL_CONFIGURATION_MONO;//单声道
-//    private static int CHANNEL_CONFIGURATION = AudioFormat.CHANNEL_CONFIGURATION_STEREO;//双声道;
-//    private static int CHANNEL_CONFIGURATION = AudioFormat.CHANNEL_OUT_MONO;//单声道输出(左)
-//    private static int CHANNEL_CONFIGURATION = AudioFormat.CHANNEL_OUT_STEREO;//立体声输出(左和右)
+    public static int CHANNEL_CONFIGURATION = AudioFormat.CHANNEL_IN_MONO;//单声道
+//    public static int CHANNEL_CONFIGURATION = AudioFormat.CHANNEL_IN_STEREO;//立体声
+//    public static int CHANNEL_CONFIGURATION = AudioFormat.CHANNEL_CONFIGURATION_MONO;//单声道
+//    public static int CHANNEL_CONFIGURATION = AudioFormat.CHANNEL_CONFIGURATION_STEREO;//双声道;
+//    public static int CHANNEL_CONFIGURATION = AudioFormat.CHANNEL_OUT_MONO;//单声道输出(左)
+//    public static int CHANNEL_CONFIGURATION = AudioFormat.CHANNEL_OUT_STEREO;//立体声输出(左和右)
 
 
     /*音频采集的格式，数据位宽16位*/
-    private static final int AUDIO_FORMAT = AudioFormat.ENCODING_PCM_16BIT;
+    public static final int AUDIO_FORMAT = AudioFormat.ENCODING_PCM_16BIT;
     /*音频缓冲区大小*/
     private int mBufferSizeInBytes = 0;
     /*是否正在录音*/

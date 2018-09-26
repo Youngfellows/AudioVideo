@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
@@ -10,7 +10,7 @@
         android:background="@android:color/black"
         android:gravity="center"
         android:text="AudioRecord与AudioTrack的使用"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/white" />
 
     <TextView
         android:id="@+id/tv_time"
@@ -18,36 +18,45 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:padding="5dp"
-        android:text="00:00"/>
+        android:text="00:00" />
 
     <TextView
         android:id="@+id/tv_file_path"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="5dp"
-        android:text="文件路径"/>
+        android:text="文件路径" />
 
     <Button
         android:id="@+id/btn_record"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="16dp"
-        android:text="开始录音"/>
+        android:text="开始录音" />
 
     <Button
         android:id="@+id/btn_play"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="16dp"
-        android:text="播放录音"/>
+        android:text="播放录音" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:onClick="setVolume"
-        android:text="获取音量并设置"/>
+        android:layout_marginTop="16dp"
+        android:onClick="pcmConvertWav"
+        android:text="pcm转wav" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:onClick="getVolume"
+        android:text="获取音量并设置" />
 
 </LinearLayout>
