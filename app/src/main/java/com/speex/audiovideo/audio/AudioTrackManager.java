@@ -6,6 +6,8 @@ import android.media.AudioRecord;
 import android.media.AudioTrack;
 import android.util.Log;
 
+import com.speex.audiovideo.App;
+import com.speex.audiovideo.R;
 import com.speex.audiovideo.exception.AudioConfigurationException;
 
 import java.io.DataInputStream;
@@ -13,6 +15,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 
 
 public class AudioTrackManager {
@@ -161,8 +164,15 @@ public class AudioTrackManager {
         @Override
         public void run() {
             try {
-                FileInputStream fileInputStream = new FileInputStream(new File(mFilePath));
+//                FileInputStream fileInputStream = new FileInputStream(new File(mFilePath));
+//                mDataInputStream = new DataInputStream(fileInputStream);
+
+//                InputStream fileInputStream = App.mContext.getAssets().open("tts_no_internet.pcm");
+                InputStream fileInputStream = App.mContext.getResources().openRawResource(R.raw.tts_no_internet);
+
                 mDataInputStream = new DataInputStream(fileInputStream);
+
+
                 byte[] audioDataArray = new byte[mBufferSizeInBytes];
                 int readLength = 0;
                 while (mDataInputStream.available() > 0) {

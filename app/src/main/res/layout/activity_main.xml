@@ -59,14 +59,5 @@
         android:onClick="getVolume"
         android:text="获取音量并设置" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dp"
-        android:onClick="playTTS"
-        android:text="播放TTS" />
-
-
 
 </LinearLayout>
